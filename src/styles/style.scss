@@ -1,0 +1,43 @@
+
+@import "bootstrap/scss/bootstrap";
+
+.width-menu{
+  width: 150px !important;
+  height: 100% !important;
+}
+.no-border {
+  border-width: 0px;
+  border-color: red !important;
+}
+.input-obligatorio {
+  color: #ff0000 !important;
+}
+.text-error{
+  color: #ff0000 !important;
+font-size: 10PX;
+}
+
+.sidebar {
+  width: 120px;
+  height: 100%;
+  background-color: #212529;
+  color: #fff;
+  position: fixed;
+  overflow-x: hidden;
+  transition: 0.3s;
+  padding-left: 12px;
+}
+
+.sidebar ul {
+  padding: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+}
+
+.content {
+  margin-left: 120px; /* Ancho inicial del menú */
+  transition: 0.3s;
+  padding: 20px;
+}
