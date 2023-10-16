@@ -13,7 +13,10 @@ function NavBar() {
             <div className="sidebar">
                 <ul>
                     <Nav className="me-auto" navbar>
-                        
+
+                        <hr className='hr-menu'></hr>
+
+                        <span className='title-menus'>Menú agencia</span>
                         <NavLink
                             to="/"
                             className={({ isActive }) => `nav-item nav-link  ${isActive ? 'active' : ''}`}
@@ -26,7 +29,16 @@ function NavBar() {
                         >
                             Habitaciones
                         </NavLink>
-                        <hr></hr>
+                        <NavLink
+                            to="reservations"
+                            className={({ isActive }) => `nav-item nav-link  ${isActive ? 'active' : ''}`}
+                        >
+                            Reservaciones
+                        </NavLink>
+
+                        <hr className='hr-menu'></hr>
+
+                        <span className='title-menus'>Menú viajeros</span>
                         <NavLink
                             to="other"
                             className={({ isActive }) => `nav-item nav-link  ${isActive ? 'active' : ''}`}
@@ -36,7 +48,7 @@ function NavBar() {
                     </Nav>
                 </ul>
             </div>
-            <div>
+            <div className='app-router'>
                 <AppRouter />
             </div>
         </>

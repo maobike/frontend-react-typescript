@@ -16,7 +16,7 @@ function NavBar() {
 
     return (
         <>
-            <Navbar color="dark" dark={true} expand="md">
+            <Navbar color="dark" dark={true} expand="md" className='fixed-top'>
                 <NavbarBrand className='text-warning' data-testid='titleApp'>Test App</NavbarBrand>
                 <NavbarToggler onClick={toggle} />
                 <Collapse isOpen={isOpen} navbar>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import '../../../assets/font-awesome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button, Card, Row, Col, Table, CardBody, InputGroup, Input, InputGroupText, Modal } from 'reactstrap';
+import { Button, Card, Row, Col, Table, CardBody, InputGroup, Input, InputGroupText, Modal, CardTitle } from 'reactstrap';
 
 import { FormRoom } from './FormRoom';
 import { Rooms, ResultData} from '../../../interfaces/data-rooms';
@@ -51,15 +51,11 @@ export const ListRooms = () => {
         if (dataRoom && Array.isArray(dataRoom)) {
             dataRoom.map((dataRoom: Rooms, index: number) => {
                 const numberString = dataRoom?.number.toString();
-                const reservedString = dataRoom?.reserved.toString();
-                const statusString = dataRoom?.reserved.toString();
             
                 if (
                     numberString?.toUpperCase().includes(value.toUpperCase()) ||
                     dataRoom?.type.toUpperCase().includes(value.toUpperCase()) ||
                     dataRoom?.price.toUpperCase().includes(value.toUpperCase()) ||
-                    reservedString?.toUpperCase().includes(value.toUpperCase()) ||
-                    statusString?.toUpperCase().includes(value.toUpperCase()) ||
                     dataRoom?.hotel.name.toUpperCase().includes(value.toUpperCase())
                 ) {
                     newArray.push(dataRoom);
@@ -93,6 +89,7 @@ export const ListRooms = () => {
             <Row>
                 <Col md="12">
                     <Card>
+                        <CardTitle className='title'>Listado de habitaciones</CardTitle>
                         <CardBody>
                             <Col md="12" className="">
                                 <Table className="">
@@ -101,7 +98,7 @@ export const ListRooms = () => {
                                             <td>
                                                 <form onSubmit={SearchHotel}>
                                                     <Row >
-                                                        <Col md={4}>
+                                                        <Col md={6}>
                                                             <InputGroup className="no-border">
                                                                 <Input
                                                                     placeholder="Buscar..."
@@ -134,7 +131,7 @@ export const ListRooms = () => {
                                                 <th>Tipo</th>
                                                 <th>Precio</th>
                                                 <th>Reservada</th>
-                                                <th>Estatus</th>
+                                                <th>Estado</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -146,9 +143,9 @@ export const ListRooms = () => {
                                                         <td>{dataRes.hotel.name}</td>
                                                         <td>{dataRes.number}</td>
                                                         <td>{dataRes.type}</td>
-                                                        <td>{dataRes.price}</td>
+                                                        <td>${dataRes.price}</td>
                                                         <td>{dataRes.reserved === true ? 'Reservada' : 'Libre'}</td>
-                                                        <td>{dataRes.status === true ? 'Activo' : 'Inactivo'}</td>
+                                                        <td>{dataRes.status === true ? 'Activa' : 'Inactiva'}</td>
                                                         <td style={{ textAlign: 'center', alignSelf: 'stretch' }}>
                                                             <Button title="Editar habitación" color="link" onClick={() => formRoom(dataRes)}>
                                                                 <FontAwesomeIcon icon="edit" />

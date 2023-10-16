@@ -6,14 +6,14 @@ class RoomServiceClass {
      * @author Mauricio Moreno @maomaoq@hotmail.com
      */
 
-    data: { rooms: Rooms[] };
+    dataRooms: { rooms: Rooms[] };
 
     constructor(){
-      this.data = {
+      this.dataRooms = {
         "rooms": [
           {
             "id": 1,
-            "number": 202,
+            "number": 1,
             "type": "Sencilla",
             "price": "200.000",
             "reserved": false,
@@ -27,7 +27,63 @@ class RoomServiceClass {
           },
           {
             "id": 2,
-            "number": 203,
+            "number": 2,
+            "type": "Doble",
+            "price": "300.000",
+            "reserved": true,
+            "status": true,
+            "createdAt": new Date(),
+            "updatedAt": new Date(),
+            "hotel": {
+              "id": 1,
+              "name": "Hotel Resort las palmas"
+            },
+          },
+          {
+            "id": 3,
+            "number": 3,
+            "type": "Ejecutiva",
+            "price": "500.000",
+            "reserved": false,
+            "status": false,
+            "createdAt": new Date(),
+            "updatedAt": new Date(),
+            "hotel": {
+              "id": 1,
+              "name": "Hotel Resort las palmas"
+            },            
+          },
+          {
+            "id": 4,
+            "number": 4,
+            "type": "Suite",
+            "price": "5.000.000",
+            "reserved": false,
+            "status": true,
+            "createdAt": new Date(),
+            "updatedAt": new Date(),
+            "hotel": {
+              "id": 1,
+              "name": "Hotel Resort las palmas"
+            },            
+          },
+          {
+            "id": 5,
+            "number": 1,
+            "type": "Sencilla",
+            "price": "200.000",
+            "reserved": false,
+            "status": true,
+            "createdAt": new Date(),
+            "updatedAt": new Date(),
+            "hotel": {
+              "id": 2,
+              "name": "Hotel la campiña"
+            },
+          },
+          {
+            "id": 6,
+            "number": 2,
             "type": "Doble",
             "price": "300.000",
             "reserved": true,
@@ -40,10 +96,66 @@ class RoomServiceClass {
             },
           },
           {
-            "id": 3,
-            "number": 304,
+            "id": 7,
+            "number": 3,
+            "type": "Ejecutiva",
+            "price": "500.000",
+            "reserved": false,
+            "status": false,
+            "createdAt": new Date(),
+            "updatedAt": new Date(),
+            "hotel": {
+              "id": 2,
+              "name": "Hotel la campiña"
+            },            
+          },
+          {
+            "id": 8,
+            "number": 4,
             "type": "Suite",
             "price": "5.000.000",
+            "reserved": false,
+            "status": true,
+            "createdAt": new Date(),
+            "updatedAt": new Date(),
+            "hotel": {
+              "id": 2,
+              "name": "Hotel la campiña"
+            },            
+          },
+          {
+            "id": 9,
+            "number": 1,
+            "type": "Sencilla",
+            "price": "200.000",
+            "reserved": false,
+            "status": true,
+            "createdAt": new Date(),
+            "updatedAt": new Date(),
+            "hotel": {
+              "id": 3,
+              "name": "Hotel Four Points"
+            },
+          },
+          {
+            "id": 10,
+            "number": 2,
+            "type": "Doble",
+            "price": "300.000",
+            "reserved": true,
+            "status": true,
+            "createdAt": new Date(),
+            "updatedAt": new Date(),
+            "hotel": {
+              "id": 3,
+              "name": "Hotel Four Points"
+            },
+          },
+          {
+            "id": 11,
+            "number": 3,
+            "type": "Ejecutiva",
+            "price": "500.000",
             "reserved": false,
             "status": false,
             "createdAt": new Date(),
@@ -54,8 +166,8 @@ class RoomServiceClass {
             },            
           },
           {
-            "id": 4,
-            "number": 401,
+            "id": 12,
+            "number": 4,
             "type": "Suite",
             "price": "5.000.000",
             "reserved": false,
@@ -67,20 +179,7 @@ class RoomServiceClass {
               "name": "Hotel Four Points"
             },            
           },
-          {
-            "id": 5,
-            "number": 202,
-            "type": "Ejecutiva",
-            "price": "500.000",
-            "reserved": false,
-            "status": true,
-            "createdAt": new Date(),
-            "updatedAt": new Date(),
-            "hotel": {
-              "id": 1,
-              "name": "Hotel Resort las palmas"
-            },
-          }
+
         ]
       };
     }
@@ -93,7 +192,7 @@ class RoomServiceClass {
     getRooms = () => {
         //return axiosInstance.get('/api/rooms')
 
-        const data = this.data;
+        const data = this.dataRooms;
         return new Promise((resolve) => {
             setTimeout(() => {
                 resolve({ data });
@@ -108,8 +207,8 @@ class RoomServiceClass {
 
     addRoom = (data: Rooms) => {
         //return axiosInstance.post('/api/rooms', data)
-        data.id = this.data.rooms.length + 1;
-        this.data.rooms.push(data);
+        data.id = this.dataRooms.rooms.length + 1;
+        this.dataRooms.rooms.push(data);
 
         return new Promise((resolve) => {
             setTimeout(() => {
@@ -130,12 +229,12 @@ class RoomServiceClass {
     editRoom = (id: number, newData: Rooms) => {
         //return axiosInstance.put(`/api/rooms/${id}`, data);
 
-        const index = this.data.rooms.findIndex(elemento => elemento.id === id);
-        this.data.rooms[index].number = newData.number;
-        this.data.rooms[index].type = newData.type;
-        this.data.rooms[index].price = newData.price;
-        this.data.rooms[index].reserved = newData.reserved;
-        this.data.rooms[index].status = newData.status;
+        const index = this.dataRooms.rooms.findIndex(elemento => elemento.id === id);
+        this.dataRooms.rooms[index].number = newData.number;
+        this.dataRooms.rooms[index].type = newData.type;
+        this.dataRooms.rooms[index].price = newData.price;
+        this.dataRooms.rooms[index].reserved = newData.reserved;
+        this.dataRooms.rooms[index].status = newData.status;
 
         return new Promise((resolve) => {
           setTimeout(() => {

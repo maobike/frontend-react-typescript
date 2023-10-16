@@ -82,7 +82,7 @@ export function FormHotel({
         }
     }
 
-    // Crear cliente
+    // Crear hotel
     const addHotel = async (data: Hotels) => {
         const result: ResultData = await HotelService.addHotel(data) as ResultData;
         
@@ -110,7 +110,7 @@ export function FormHotel({
         }
     }
 
-    // Actualizar cliente
+    // Actualizar hotel
     const updateHotel = async (data: Hotels) => {
         try {
             const hotelId = hotel?.id ?? 0;
@@ -275,7 +275,7 @@ export function FormHotel({
                     <Row>
                         <Col md={6}>
                             <FormGroup>
-                                <Label>estado <span className="input-obligatorio">*</span></Label>
+                                <Label>Estado <span className="input-obligatorio">*</span></Label>
                                 <select className="form-control"
                                     {...register("status", {
                                         required: true,

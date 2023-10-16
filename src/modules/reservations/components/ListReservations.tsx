@@ -4,10 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Card, Row, Col, Table, CardBody, InputGroup, Input, InputGroupText, Modal, CardTitle } from 'reactstrap';
 
 import HotelService from '../services/HotelService';
-import { FormHotel } from './FormHotel';
+//import { FormHotel } from './FormHotel';
 import { Hotels, ResultData} from '../../../interfaces/data-hotels';
 
-export const ListHotels = () => {
+export const ListReservations = () => {
     const [dataHotel, setDataHotel] = useState<Hotels[] | null>(null);
     const [dataHotelFilter, setDataHotelFilter] = useState<Hotels[] | null>(null);
     const [modal, setModal] = useState(false);
@@ -89,7 +89,7 @@ export const ListHotels = () => {
             <Row>
                 <Col md="12">
                     <Card>
-                        <CardTitle className='title'>Listado de hoteles</CardTitle>
+                        <CardTitle className='title'>Listado de reservaciones</CardTitle>
                         <CardBody>
                             <Col md="12" className="">
                                 <Table className="">
@@ -166,7 +166,7 @@ export const ListHotels = () => {
             </Row>
             <div>
                 <Modal isOpen={modal} toggle={toggle} size="xl">
-                    <FormHotel toggle={toggle} hotel={hotel} refreshList={refreshList}></FormHotel>
+                    {/* <FormHotel toggle={toggle} hotel={hotel} refreshList={refreshList}></FormHotel> */}
                 </Modal>
             </div>
         </div>
