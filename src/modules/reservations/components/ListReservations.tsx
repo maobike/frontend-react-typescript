@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import '../../../assets/font-awesome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Button, Card, Row, Col, Table, CardBody, InputGroup, Input, InputGroupText, Modal, CardTitle } from 'reactstrap';
+import { Button, Card, Row, Col, Table, CardBody, Modal, CardTitle } from 'reactstrap';
 
 import ReservationService from '../services/reservationService';
 import { Reservations, ResultData } from '../../../interfaces/data-reservations';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { DetailReservation } from './DetailReservation';
 
 export const ListReservations = () => {
     const [dataReservations, setDataReservations] = useState<Reservations[] | null>(null);
-    const [reservations, setReservations] = useState<Reservations | null>(null);
+    const [reservation, setReservation] = useState<Reservations | null>(null);
     const [modal, setModal] = useState(false);
 
     useEffect(() => {
@@ -33,10 +35,10 @@ export const ListReservations = () => {
         setModal(!modal);
     };
 
-    // Abrir modal crear o editar
-    const formHotel = (reservation?: Reservations) => {
+    // Abrir modal detalle de reserva
+    const detailReservation = (reservation?: Reservations) => {
         if (reservation) {
-            setReservations(reservation);
+            setReservation(reservation);
         }
         toggle();
     };
@@ -71,6 +73,11 @@ export const ListReservations = () => {
                                                         <td>{dataRes.room.type}</td>
                                                         <td>{dataRes.room.guests}</td>
                                                         <td>${dataRes.room.price}</td>
+                                                        <td style={{ textAlign: 'center', alignSelf: 'stretch' }}>
+                                                            <Button title="Ver detalle de reserva" color="link" onClick={() => detailReservation(dataRes)}>
+                                                                <FontAwesomeIcon icon={faEye} />
+                                                            </Button>
+                                                        </td>
                                                     </tr>
                                                 );
                                             })}
@@ -83,7 +90,7 @@ export const ListReservations = () => {
                 </Row>
             <div>
                 <Modal isOpen={modal} toggle={toggle} size="xl">
-                    {/* <FormHotel toggle={toggle} hotel={hotel} refreshList={refreshList}></FormHotel> */}
+                    <DetailReservation toggle={toggle} reservation={reservation} ></DetailReservation>
                 </Modal>
             </div>
         </div>

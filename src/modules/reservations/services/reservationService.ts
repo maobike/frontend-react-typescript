@@ -1,4 +1,3 @@
-import { axiosInstanceExtern } from "../../../api/AxiosConfig";
 import { Hotels } from '../../../interfaces/data-hotels';
 import { Reservations } from "../../../interfaces/data-reservations";
 import { Rooms } from "../../../interfaces/data-rooms";
@@ -257,7 +256,7 @@ class ReservationServiceClass {
           {
             "id": 1,
             "name": "Mauricio Moreno",
-            "birthday": new Date("25/12/1990"),
+            "birthday": new Date("1990-12-25"),
             "gender": "Male",
             "typeDocument": "CC",
             "document": "80169686",
@@ -282,7 +281,7 @@ class ReservationServiceClass {
           {
             "id": 2,
             "name": "Mauricio Moreno",
-            "birthday": new Date("25/12/1990"),
+            "birthday": new Date("1990-12-25"),
             "gender": "Male",
             "typeDocument": "CC",
             "document": "80169686",

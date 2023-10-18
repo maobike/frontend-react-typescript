@@ -213,7 +213,7 @@ class SearchServiceClass {
           {
             "id": 1,
             "name": "Mauricio Moreno",
-            "birthday": new Date("25/12/1990"),
+            "birthday": new Date("1990-12-25"),
             "gender": "Male",
             "typeDocument": "CC",
             "document": "80169686",
@@ -238,7 +238,7 @@ class SearchServiceClass {
           {
             "id": 2,
             "name": "Mauricio Moreno",
-            "birthday": new Date("25/12/1990"),
+            "birthday": new Date("1990-12-25"),
             "gender": "Male",
             "typeDocument": "CC",
             "document": "80169686",
