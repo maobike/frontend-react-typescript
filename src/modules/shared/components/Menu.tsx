@@ -40,7 +40,7 @@ function NavBar() {
 
                         <span className='title-menus'>Menú viajeros</span>
                         <NavLink
-                            to="other"
+                            to="search/rooms"
                             className={({ isActive }) => `nav-item nav-link  ${isActive ? 'active' : ''}`}
                         >
                             Búsqueda

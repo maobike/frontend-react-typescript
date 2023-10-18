@@ -1,12 +1,14 @@
+import { Reservations } from '../../../interfaces/data-reservations';
 import { Rooms } from '../../../interfaces/data-rooms';
 
-class RoomServiceClass {
+class SearchServiceClass {
 
     /**
      * @author Mauricio Moreno @maomaoq@hotmail.com
      */
 
     dataRooms: { rooms: Rooms[] };
+    dataReservations: { reservations: Reservations[] };
 
     constructor(){
       this.dataRooms = {
@@ -32,7 +34,7 @@ class RoomServiceClass {
             "number": 2,
             "type": "Doble",
             "price": "300.000",
-            "reserved": true,
+            "reserved": false,
             "status": true,
             "guests": 2,
             "createdAt": new Date(),
@@ -49,7 +51,7 @@ class RoomServiceClass {
             "type": "Ejecutiva",
             "price": "500.000",
             "reserved": false,
-            "status": false,
+            "status": true,
             "guests": 3,
             "createdAt": new Date(),
             "updatedAt": new Date(),
@@ -96,7 +98,7 @@ class RoomServiceClass {
             "number": 2,
             "type": "Doble",
             "price": "300.000",
-            "reserved": true,
+            "reserved": false,
             "status": true,
             "guests": 2,
             "createdAt": new Date(),
@@ -113,7 +115,7 @@ class RoomServiceClass {
             "type": "Ejecutiva",
             "price": "500.000",
             "reserved": false,
-            "status": false,
+            "status": true,
             "guests": 3,
             "createdAt": new Date(),
             "updatedAt": new Date(),
@@ -160,7 +162,7 @@ class RoomServiceClass {
             "number": 2,
             "type": "Doble",
             "price": "300.000",
-            "reserved": true,
+            "reserved": false,
             "status": true,
             "guests": 2,
             "createdAt": new Date(),
@@ -177,7 +179,7 @@ class RoomServiceClass {
             "type": "Ejecutiva",
             "price": "500.000",
             "reserved": false,
-            "status": false,
+            "status": true,
             "guests": 3,
             "createdAt": new Date(),
             "updatedAt": new Date(),
@@ -203,9 +205,63 @@ class RoomServiceClass {
               "city": "Barranquilla"
             },            
           },
-
         ]
       };
+
+      this.dataReservations = {
+        "reservations" : [
+          {
+            "id": 1,
+            "name": "Mauricio Moreno",
+            "birthday": new Date("25/12/1990"),
+            "gender": "Male",
+            "typeDocument": "CC",
+            "document": "80169686",
+            "email": "mauricio.moreno@gmail.com",
+            "phone": 3102516675,
+            "nameContact": "Paola Rodriguez",
+            "phoneContact": 3102345678,
+            "hotel": {
+              "id": 3,
+              "name": "Hotel Four Points",
+              "city": "Barranquilla"
+            },
+            "room": {
+              "id": 9,
+              "price": "200.000",
+              "type": "Sencilla",
+              "guests": 1,
+            },
+            "createdAt": new Date(),
+            "updatedAt": new Date(),
+          },
+          {
+            "id": 2,
+            "name": "Mauricio Moreno",
+            "birthday": new Date("25/12/1990"),
+            "gender": "Male",
+            "typeDocument": "CC",
+            "document": "80169686",
+            "email": "mauricio.moreno@gmail.com",
+            "phone": 3102516675,
+            "nameContact": "Paola Rodriguez",
+            "phoneContact": 3102345678,
+            "hotel": {
+              "id": 2,
+              "name": "Hotel la campiña",
+              "city": "Cartagena"
+            },
+            "room": {
+              "id": 6,
+              "price": "300.000",
+              "type": "Doble",
+              "guests": 2,
+            },
+            "createdAt": new Date(),
+            "updatedAt": new Date(),
+          },
+        ]
+      }
     }
 
     /**
@@ -213,68 +269,61 @@ class RoomServiceClass {
      * @author Mauricio Moreno @maomaoq@hotmail.com
      */
 
-    getRooms = () => {
-        //return axiosInstance.get('/api/rooms')
+    searchRooms = (dataFilter: any) => {
+        const data = this.dataRooms.rooms.filter(room => {
+        
+          return (
+            (!dataFilter.guests || room.guests === parseInt(dataFilter.guests)) &&
+            (!dataFilter.city || room.hotel.city.toUpperCase() === dataFilter.city.toUpperCase())
+          );
+        });
+               
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve( data );
+            }, 200); // Simular una demora de 1 segundo, como si fuera una solicitud a la API real
+        });
+    }
 
-        const data = this.dataRooms;
+        /**
+     * @returns rooms
+     * @author Mauricio Moreno @maomaoq@hotmail.com
+     */
+
+      getReservations = () => {
+        const data = this.dataReservations;
         return new Promise((resolve) => {
             setTimeout(() => {
                 resolve({ data });
             }, 200); // Simular una demora de 1 segundo, como si fuera una solicitud a la API real
         });
     }
+  
 
     /**
      * @returns room
      * @author Mauricio Moreno @maomaoq@hotmail.com
      */
 
-    addRoom = (data: Rooms) => {
-        //return axiosInstance.post('/api/rooms', data)
-        data.id = this.dataRooms.rooms.length + 1;
-        this.dataRooms.rooms.push(data);
+    createReservation = (data: Reservations) => {
+      data.id = this.dataReservations.reservations.length + 1;
+      this.dataReservations.reservations.push(data);
 
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve({
-                    data: data,
-                    status: 200,
-                    message: 'Habitación creada',
-                });
-            }, 200); // Simular una demora de 200 mili segundos, como si fuera una solicitud a la API real
-        });
-    }
-
-    /**
-     * @returns room
-     * @author Mauricio Moreno @maomaoq@hotmail.com
-     */
-
-    editRoom = (id: number, newData: Rooms) => {
-        //return axiosInstance.put(`/api/rooms/${id}`, data);
-
-        const index = this.dataRooms.rooms.findIndex(elemento => elemento.id === id);
-        this.dataRooms.rooms[index].number = newData.number;
-        this.dataRooms.rooms[index].type = newData.type;
-        this.dataRooms.rooms[index].price = newData.price;
-        this.dataRooms.rooms[index].reserved = newData.reserved;
-        this.dataRooms.rooms[index].status = newData.status;
-
-        return new Promise((resolve) => {
+      // Se debe crear la reserva y enviar el correo
+      return new Promise((resolve) => {
           setTimeout(() => {
               resolve({
-                  data: newData,
-                  status: 200,
-                  message: 'Habitación modificada',
+                data: data,
+                status: 200,
+                message: 'Reservación creada, se le ha enviado un mensaje con los datos de la reserva a su correo electrónico',
               });
-          }, 200); // Simular una demora de 200 mili segundos, como si fuera una solicitud a la API real
+          }, 200); // Simular una demora de 1 segundo, como si fuera una solicitud a la API real
       });
-
     }
-
+    
 
 }
 
-const RoomService = new RoomServiceClass();
+const SearchService = new SearchServiceClass();
 
-export default RoomService;
+export default SearchService;

@@ -66,11 +66,13 @@ export function FormRoom({
                 price: data.price,
                 reserved: data.reserved,
                 status: data.status,
+                guests: 1,
                 createdAt: data.createdAt,
                 updatedAt: data.updatedAt,
                 hotel: {
                     id: data.hotel,
-                    name: `${hotel?.name}`
+                    name: `${hotel?.name}`,
+                    city: `${hotel?.city}`,
                 }
             };
             // Crear o editar
@@ -154,7 +156,7 @@ export function FormRoom({
             <ModalBody>
                 <form name="form-list" id="form-list">
                     <Row>
-                        <Col md={6}>
+                        <Col md={4}>
                             <FormGroup>
                                 <Label>Hotel <span className="input-obligatorio">*</span></Label>
                                 <select className="form-control"
@@ -192,7 +194,6 @@ export function FormRoom({
                                     {errors.number?.type === "required" && "El número es requerido"}
                                     {errors.number?.type === "maxLength" && "Este campo debe contener máximo 10 caracteres"}
                                     {errors.number?.type === "pattern" && "Este campo debe ser un número valido" }
-
                                 </div>
                             </FormGroup>
                         </Col>
@@ -210,7 +211,28 @@ export function FormRoom({
                                     <option value="Suite">Suite</option>
                                 </select>
                                 <div className="text-error">
-                                    {errors.type?.type === "required" && "El email es requerido"}
+                                    {errors.type?.type === "required" && "El tipo de habitación es requerido"}
+                                </div>
+                            </FormGroup>
+                        </Col>
+                        <Col md={2}>
+                            <FormGroup>
+                                <Label># Huéspedes <span className="input-obligatorio">*</span></Label>
+                                <input className="form-control"
+                                    type="number"
+                                    autoFocus
+                                    maxLength={10}
+                                    {...register("guests", { 
+                                        required: true,
+                                        maxLength: 2,
+                                        pattern: /^[0-9]+$/
+                                    })}
+                                />
+                                <div className="text-error">
+                                    {errors.guests?.type === "required" && "El número de huéspedes es requerido"}
+                                    {errors.guests?.type === "maxLength" && "Este campo debe contener máximo 2 caracteres"}
+                                    {errors.guests?.type === "pattern" && "Este campo debe ser un número valido" }
+
                                 </div>
                             </FormGroup>
                         </Col>

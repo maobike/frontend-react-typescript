@@ -1,14 +1,60 @@
-import { Rooms } from '../../../interfaces/data-rooms';
+import { axiosInstanceExtern } from "../../../api/AxiosConfig";
+import { Hotels } from '../../../interfaces/data-hotels';
+import { Reservations } from "../../../interfaces/data-reservations";
+import { Rooms } from "../../../interfaces/data-rooms";
 
-class RoomServiceClass {
+class ReservationServiceClass {
 
     /**
      * @author Mauricio Moreno @maomaoq@hotmail.com
      */
 
+    dataHotels: { hotels: Hotels[] };
     dataRooms: { rooms: Rooms[] };
+    dataReservations: { reservations: Reservations[] };
 
     constructor(){
+      this.dataHotels = {
+        "hotels": [
+          {
+            "id": 1,
+            "name": "Hotel Resort las palmas",
+            "email": "servicio@laspalmas.com",
+            "street": "calle 10 # 23-45",
+            "phone": "3142836430",
+            "country": "Colombia",
+            "city": "Medellin",
+            "status": true,
+            "createdAt": new Date(),
+            "updatedAt": new Date()
+          },
+          {
+            "id": 2,
+            "name": "Hotel la campiña",
+            "email": "reservas@lacampina.com",
+            "street": "calle 100 # 50-5",
+            "phone": "3102456687",
+            "country": "Colombia",
+            "city": "Cartagena",
+            "status": false,
+            "createdAt": new Date(),
+            "updatedAt": new Date()
+          },
+          {
+            "id": 3,
+            "name": "Hotel Four Points",
+            "email": "servicio@fourpoints.com",
+            "street": "carrera 53 No 79-212",
+            "phone": "3143556789",
+            "country": "Colombia",
+            "city": "Barranquilla",
+            "status": true,
+            "createdAt": new Date(),
+            "updatedAt": new Date()
+          }
+        ]
+      };
+
       this.dataRooms = {
         "rooms": [
           {
@@ -203,9 +249,77 @@ class RoomServiceClass {
               "city": "Barranquilla"
             },            
           },
-
         ]
       };
+
+      this.dataReservations = {
+        "reservations" : [
+          {
+            "id": 1,
+            "name": "Mauricio Moreno",
+            "birthday": new Date("25/12/1990"),
+            "gender": "Male",
+            "typeDocument": "CC",
+            "document": "80169686",
+            "email": "mauricio.moreno@gmail.com",
+            "phone": 3102516675,
+            "nameContact": "Paola Rodriguez",
+            "phoneContact": 3102345678,
+            "hotel": {
+              "id": 3,
+              "name": "Hotel Four Points",
+              "city": "Barranquilla"
+            },
+            "room": {
+              "id": 9,
+              "price": "200.000",
+              "type": "Sencilla",
+              "guests": 1,
+            },
+            "createdAt": new Date(),
+            "updatedAt": new Date(),
+          },
+          {
+            "id": 2,
+            "name": "Mauricio Moreno",
+            "birthday": new Date("25/12/1990"),
+            "gender": "Male",
+            "typeDocument": "CC",
+            "document": "80169686",
+            "email": "mauricio.moreno@gmail.com",
+            "phone": 3102516675,
+            "nameContact": "Paola Rodriguez",
+            "phoneContact": 3102345678,
+            "hotel": {
+              "id": 2,
+              "name": "Hotel la campiña",
+              "city": "Cartagena"
+            },
+            "room": {
+              "id": 6,
+              "price": "300.000",
+              "type": "Doble",
+              "guests": 2,
+            },
+            "createdAt": new Date(),
+            "updatedAt": new Date(),
+          },
+        ]
+      }
+    }
+
+    /**
+     * @returns hotels
+     * @author Mauricio Moreno @maomaoq@hotmail.com
+     */
+
+    getHotels = () => {
+        const data = this.dataHotels;
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                resolve({ data });
+            }, 200); // Simular una demora de 1 segundo, como si fuera una solicitud a la API real
+        });
     }
 
     /**
@@ -214,8 +328,6 @@ class RoomServiceClass {
      */
 
     getRooms = () => {
-        //return axiosInstance.get('/api/rooms')
-
         const data = this.dataRooms;
         return new Promise((resolve) => {
             setTimeout(() => {
@@ -225,56 +337,21 @@ class RoomServiceClass {
     }
 
     /**
-     * @returns room
+     * @returns reservations
      * @author Mauricio Moreno @maomaoq@hotmail.com
      */
 
-    addRoom = (data: Rooms) => {
-        //return axiosInstance.post('/api/rooms', data)
-        data.id = this.dataRooms.rooms.length + 1;
-        this.dataRooms.rooms.push(data);
-
+    getReservations = () => {
+        const data = this.dataReservations;
         return new Promise((resolve) => {
             setTimeout(() => {
-                resolve({
-                    data: data,
-                    status: 200,
-                    message: 'Habitación creada',
-                });
-            }, 200); // Simular una demora de 200 mili segundos, como si fuera una solicitud a la API real
+                resolve({ data });
+            }, 200); // Simular una demora de 1 segundo, como si fuera una solicitud a la API real
         });
     }
 
-    /**
-     * @returns room
-     * @author Mauricio Moreno @maomaoq@hotmail.com
-     */
-
-    editRoom = (id: number, newData: Rooms) => {
-        //return axiosInstance.put(`/api/rooms/${id}`, data);
-
-        const index = this.dataRooms.rooms.findIndex(elemento => elemento.id === id);
-        this.dataRooms.rooms[index].number = newData.number;
-        this.dataRooms.rooms[index].type = newData.type;
-        this.dataRooms.rooms[index].price = newData.price;
-        this.dataRooms.rooms[index].reserved = newData.reserved;
-        this.dataRooms.rooms[index].status = newData.status;
-
-        return new Promise((resolve) => {
-          setTimeout(() => {
-              resolve({
-                  data: newData,
-                  status: 200,
-                  message: 'Habitación modificada',
-              });
-          }, 200); // Simular una demora de 200 mili segundos, como si fuera una solicitud a la API real
-      });
-
-    }
-
-
 }
 
-const RoomService = new RoomServiceClass();
+const ReservationService = new ReservationServiceClass();
 
-export default RoomService;
+export default ReservationService;

@@ -9,6 +9,7 @@ export interface Rooms {
     price: string,
     reserved: boolean,
     status: boolean,
+    guests: number,
     createdAt: Date,
     updatedAt: Date,
     hotel: Hotel,
@@ -16,11 +17,13 @@ export interface Rooms {
 
 export interface Hotel {
     id: number,
-    name: string;
+    name: string,
+    city: string,
 }
 export interface ResultData {
     status: number,
     message: string,
+    length: number,
     data: {
         rooms: Rooms[];
     }

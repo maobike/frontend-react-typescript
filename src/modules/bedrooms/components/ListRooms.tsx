@@ -127,8 +127,9 @@ export const ListRooms = () => {
                                             <tr>
                                                 <th>Id</th>
                                                 <th>Hotel</th>
-                                                <th>Número</th>
+                                                <th>#</th>
                                                 <th>Tipo</th>
+                                                <th>Huéspedes</th>
                                                 <th>Precio</th>
                                                 <th>Reservada</th>
                                                 <th>Estado</th>
@@ -143,8 +144,11 @@ export const ListRooms = () => {
                                                         <td>{dataRes.hotel.name}</td>
                                                         <td>{dataRes.number}</td>
                                                         <td>{dataRes.type}</td>
+                                                        <td>{dataRes.guests}</td>
                                                         <td>${dataRes.price}</td>
-                                                        <td>{dataRes.reserved === true ? 'Reservada' : 'Libre'}</td>
+                                                        <td className={dataRes.reserved === true ? 'text-danger' : ''}>
+                                                            {dataRes.reserved === true ? 'Reservada' : 'Libre'}
+                                                        </td>
                                                         <td>{dataRes.status === true ? 'Activa' : 'Inactiva'}</td>
                                                         <td style={{ textAlign: 'center', alignSelf: 'stretch' }}>
                                                             <Button title="Editar habitación" color="link" onClick={() => formRoom(dataRes)}>

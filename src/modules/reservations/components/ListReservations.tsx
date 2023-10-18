@@ -3,35 +3,25 @@ import '../../../assets/font-awesome';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Button, Card, Row, Col, Table, CardBody, InputGroup, Input, InputGroupText, Modal, CardTitle } from 'reactstrap';
 
-import HotelService from '../services/HotelService';
-//import { FormHotel } from './FormHotel';
-import { Hotels, ResultData} from '../../../interfaces/data-hotels';
+import ReservationService from '../services/reservationService';
+import { Reservations, ResultData } from '../../../interfaces/data-reservations';
 
 export const ListReservations = () => {
-    const [dataHotel, setDataHotel] = useState<Hotels[] | null>(null);
-    const [dataHotelFilter, setDataHotelFilter] = useState<Hotels[] | null>(null);
+    const [dataReservations, setDataReservations] = useState<Reservations[] | null>(null);
+    const [reservations, setReservations] = useState<Reservations | null>(null);
     const [modal, setModal] = useState(false);
-    const [hotel, setHotel] = useState<Hotels | null>(null);
-    const [refresh, setRefresh] = useState<boolean | undefined>();
-    const [inputText, setInputText] = useState('');
-
-    const SearchHotel = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-    };
 
     useEffect(() => {
-        getHotels();
-    }, [refresh]);
+        getReservations();
+    }, []);
 
-    
-    const getHotels = async () => {
+    const getReservations = async () => {
         try {
             // Llamamos el servicio
-            const result: ResultData = await HotelService.getHotels() as ResultData;
+            const result: ResultData = await ReservationService.getReservations() as ResultData;
             
             // Asignamos el valor del resultado
-            setDataHotel(result.data.hotels);
-            setDataHotelFilter(result.data.hotels);
+            setDataReservations(result.data.reservations);
     
             return result;
         } catch (error) {
@@ -39,131 +29,58 @@ export const ListReservations = () => {
         }
     };
 
-    // Búsqueda por correo, nombre, apellido o país
-    const handleInputChange = (input: React.ChangeEvent<HTMLInputElement>) => {
-        // limpiar arreglo
-        setDataHotelFilter(null);
-        var newArray: Hotels[] = [];
-        const { value } = input.target;
-        //Cambiar entrada a mayúsculas
-        setInputText(value.toUpperCase());
-
-        if (dataHotel && Array.isArray(dataHotel)) {
-            dataHotel.map((dataHotel: Hotels, index: number) => {
-                if (
-                    dataHotel?.name.toUpperCase().includes(value.toUpperCase()) ||
-                    dataHotel?.email.toUpperCase().includes(value.toUpperCase()) ||
-                    dataHotel?.street.toUpperCase().includes(value.toUpperCase()) ||
-                    dataHotel?.phone.toUpperCase().includes(value.toUpperCase()) ||
-                    dataHotel?.country.toUpperCase().includes(value.toUpperCase()) ||
-                    dataHotel?.city.toUpperCase().includes(value.toUpperCase())
-                ) {
-                    newArray.push(dataHotel);
-                    setDataHotelFilter(newArray);
-                }
-                return dataHotel;
-            });
-        }
-    };
-
     const toggle = () => {
         setModal(!modal);
     };
 
-    const refreshList = () => {
-        setRefresh(!refresh);
-    };
-
     // Abrir modal crear o editar
-    const formHotel = (hotel?: Hotels) => {
-        if (hotel) {
-            setHotel(hotel);
-        } else {
-            setHotel(null);
+    const formHotel = (reservation?: Reservations) => {
+        if (reservation) {
+            setReservations(reservation);
         }
         toggle();
     };
 
     return (
         <div className="content">
-            <Row>
-                <Col md="12">
-                    <Card>
-                        <CardTitle className='title'>Listado de reservaciones</CardTitle>
-                        <CardBody>
-                            <Col md="12" className="">
-                                <Table className="">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <form onSubmit={SearchHotel}>
-                                                    <Row >
-                                                        <Col md={4}>
-                                                            <InputGroup className="no-border">
-                                                                <Input
-                                                                    placeholder="Buscar..."
-                                                                    autoComplete="off"
-                                                                    name="SearchHotel"
-                                                                    value={inputText}
-                                                                    onChange={handleInputChange}
-                                                                />
-                                                                <InputGroupText>
-                                                                    <FontAwesomeIcon icon="search" />
-                                                                </InputGroupText>
-                                                                <Button color='primary'  onClick={() => formHotel()}>
-                                                                    <FontAwesomeIcon icon="plus" /> Nuevo Hotel
-                                                                </Button>
-                                                            </InputGroup>
-                                                        </Col>
-                                                    </Row>
-                                                </form>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </Table>
-                                <div style={{ overflow: 'auto' }}>
+                <Row>
+                    <Col md="12">
+                        <Card>
+                            <CardTitle className='title'>Mis reservaciones</CardTitle>
+                            <CardBody>
+                            <div style={{ overflow: 'auto' }}>
                                     <Table hover striped bordered className="borde-tabla">
                                         <thead>
                                             <tr>
                                                 <th>Id</th>
-                                                <th>Nombre</th>
-                                                <th>Email</th>
-                                                <th>Dirección</th>
-                                                <th>Teléfono</th>
-                                                <th>País</th>
+                                                <th>Hotel</th>
                                                 <th>Ciudad</th>
-                                                <th>Estado</th>
+                                                <th>Tipo</th>
+                                                <th>Huéspedes</th>
+                                                <th>Precio</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {dataHotelFilter && dataHotelFilter.length > 0 && dataHotelFilter.map((dataRes, index: number) => {
+                                            {dataReservations && dataReservations.length > 0 && dataReservations.map((dataRes: Reservations, index: number) => {
                                                 return (
                                                     <tr key={index}>
                                                         <td>{dataRes.id}</td>
-                                                        <td>{dataRes.name}</td>
-                                                        <td>{dataRes.email}</td>
-                                                        <td>{dataRes.street}</td>
-                                                        <td>{dataRes.phone}</td>
-                                                        <td>{dataRes.country}</td>
-                                                        <td>{dataRes.city}</td>
-                                                        <td>{dataRes.status === true ? 'Activo' : 'Inactivo'}</td>
-                                                        <td style={{ textAlign: 'center', alignSelf: 'stretch' }}>
-                                                            <Button title="Editar hotel" color="link" onClick={() => formHotel(dataRes)}>
-                                                                <FontAwesomeIcon icon="edit" />
-                                                            </Button>
-                                                        </td>
+                                                        <td>{dataRes.hotel.name}</td>
+                                                        <td>{dataRes.hotel.city}</td>
+                                                        <td>{dataRes.room.type}</td>
+                                                        <td>{dataRes.room.guests}</td>
+                                                        <td>${dataRes.room.price}</td>
                                                     </tr>
                                                 );
                                             })}
                                         </tbody>
                                     </Table>
                                 </div>
-                            </Col>
-                        </CardBody>
-                    </Card>
-                </Col>
-            </Row>
+                            </CardBody>
+                        </Card>
+                    </Col>
+                </Row>
             <div>
                 <Modal isOpen={modal} toggle={toggle} size="xl">
                     {/* <FormHotel toggle={toggle} hotel={hotel} refreshList={refreshList}></FormHotel> */}
