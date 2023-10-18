@@ -37,6 +37,7 @@ export function FormRoom({
                     setValue("price", room.price)
                     setValue("reserved", room.reserved)
                     setValue("status", room.status)
+                    setValue("guests", room.guests)
                 } catch (error) {
                     console.log(error);
                 }
@@ -66,7 +67,7 @@ export function FormRoom({
                 price: data.price,
                 reserved: data.reserved,
                 status: data.status,
-                guests: 1,
+                guests: data.guests,
                 createdAt: data.createdAt,
                 updatedAt: data.updatedAt,
                 hotel: {
@@ -232,7 +233,6 @@ export function FormRoom({
                                     {errors.guests?.type === "required" && "El número de huéspedes es requerido"}
                                     {errors.guests?.type === "maxLength" && "Este campo debe contener máximo 2 caracteres"}
                                     {errors.guests?.type === "pattern" && "Este campo debe ser un número valido" }
-
                                 </div>
                             </FormGroup>
                         </Col>
@@ -249,13 +249,11 @@ export function FormRoom({
                                     {...register("price", { 
                                         required: true,
                                         maxLength: 200,
-                                        pattern: /^[0-9]+(\.[0-9]+)?$/
                                     })}
                                 />
                                 <div className="text-error">
                                     {errors.price?.type === "required" && "El precio es requerido"}
                                     {errors.price?.type === "maxLength" && "Este campo debe contener máximo 7 caracteres"}
-                                    {errors.price?.type === "pattern" && "Este campo debe ser un número valido" }
                                 </div>
                             </FormGroup>
                         </Col>
@@ -267,13 +265,9 @@ export function FormRoom({
                                         required: true,
                                     })}
                                 >
-                                    <option value="">Seleccione estado de reserva</option>
-                                    <option value="false">Libre</option>
                                     <option value="true">Reservada</option>
+                                    <option value="false">Libre</option>
                                 </select>
-                                <div className="text-error">
-                                    {errors.reserved?.type === "required" && "El estado de reserva es necesario"}
-                                </div>
                             </FormGroup>
                         </Col>
                         <Col md={4}>

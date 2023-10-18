@@ -259,6 +259,7 @@ class RoomServiceClass {
         this.dataRooms.rooms[index].price = newData.price;
         this.dataRooms.rooms[index].reserved = newData.reserved;
         this.dataRooms.rooms[index].status = newData.status;
+        this.dataRooms.rooms[index].guests = newData.guests;
 
         return new Promise((resolve) => {
           setTimeout(() => {
