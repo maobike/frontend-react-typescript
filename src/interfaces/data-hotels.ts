@@ -10,7 +10,7 @@ export interface Hotels {
     phone: string,
     country: string,
     city: string,
-    status: boolean,
+    status: number,
     createdAt: Date,
     updatedAt: Date,
 }

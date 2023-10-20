@@ -131,6 +131,8 @@ export const ListRooms = () => {
                                                 <th>Tipo</th>
                                                 <th>Huéspedes</th>
                                                 <th>Precio</th>
+                                                <th>Impuestos</th>
+                                                <th>Ubicación</th>
                                                 <th>Reservada</th>
                                                 <th>Estado</th>
                                                 <th></th>
@@ -146,10 +148,14 @@ export const ListRooms = () => {
                                                         <td>{dataRes.type}</td>
                                                         <td>{dataRes.guests}</td>
                                                         <td>${dataRes.price}</td>
-                                                        <td className={dataRes.reserved === true ? 'text-danger' : ''}>
-                                                            {dataRes.reserved === true ? 'Reservada' : 'Libre'}
+                                                        <td>${dataRes.taxes}</td>
+                                                        <td>{dataRes.location}</td>
+                                                        <td className={dataRes.reserved === 1 ? 'text-danger' : ''}>
+                                                            {dataRes.reserved === 1 ? 'Reservada' : 'Libre'}
                                                         </td>
-                                                        <td>{dataRes.status === true ? 'Activa' : 'Inactiva'}</td>
+                                                        <td className={dataRes.status === 0 ? 'text-danger' : ''}>
+                                                            {dataRes.status === 1 ? 'Activa' : 'Inactiva'}
+                                                        </td>
                                                         <td style={{ textAlign: 'center', alignSelf: 'stretch' }}>
                                                             <Button title="Editar habitación" color="link" onClick={() => formRoom(dataRes)}>
                                                                 <FontAwesomeIcon icon="edit" />

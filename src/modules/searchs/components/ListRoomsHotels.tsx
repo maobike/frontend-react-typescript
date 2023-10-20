@@ -214,10 +214,10 @@ export const ListRoomsHotel = () => {
                                                         <td>{dataRes.type}</td>
                                                         <td>{dataRes.guests}</td>
                                                         <td>${dataRes.price}</td>
-                                                        <td className={dataRes.reserved === true ? 'text-danger' : ''}>
-                                                            {dataRes.reserved === true ? 'Reservada' : 'Libre'}
+                                                        <td className={dataRes.reserved === 1 ? 'text-danger' : ''}>
+                                                            {dataRes.reserved === 1 ? 'Reservada' : 'Libre'}
                                                         </td>
-                                                        <td>{dataRes.status === true ? 'Activa' : 'Inactiva'}</td>
+                                                        <td>{dataRes.status === 1 ? 'Activa' : 'Inactiva'}</td>
                                                         <td style={{ textAlign: 'center', alignSelf: 'stretch' }}>
                                                             <Button title="Crear reserva" color="link" onClick={() => formRoom(dataRes)}>
                                                                 <FontAwesomeIcon icon={faPlaneCircleCheck} />
@@ -256,6 +256,8 @@ export const ListRoomsHotel = () => {
                                                 <th>Tipo</th>
                                                 <th>Huéspedes</th>
                                                 <th>Precio</th>
+                                                <th>Impuestos</th>
+                                                <th>Ubicación</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -268,6 +270,8 @@ export const ListRoomsHotel = () => {
                                                         <td>{dataRes.room.type}</td>
                                                         <td>{dataRes.room.guests}</td>
                                                         <td>${dataRes.room.price}</td>
+                                                        <td>${dataRes.room.taxes}</td>
+                                                        <td>{dataRes.room.location}</td>
                                                     </tr>
                                                 );
                                             })}

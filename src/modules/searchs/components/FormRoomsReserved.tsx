@@ -46,7 +46,9 @@ export function FormRoomsReserved({
                     id: room?.id || 0,
                     price: `${room?.price}`,
                     type: `${room?.type}`,
-                    guests: room?.guests || 0
+                    guests: room?.guests || 0,
+                    taxes: `${room?.taxes}`,
+                    location: `${room?.location}`,
                 }
             };
 

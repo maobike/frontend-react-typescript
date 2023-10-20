@@ -35,6 +35,8 @@ export function FormRoom({
                     setValue("number", room.number)
                     setValue("type", room.type)
                     setValue("price", room.price)
+                    setValue("taxes", room.taxes)
+                    setValue("location", room.location)
                     setValue("reserved", room.reserved)
                     setValue("status", room.status)
                     setValue("guests", room.guests)
@@ -65,9 +67,11 @@ export function FormRoom({
                 number: data.number,
                 type: data.type,
                 price: data.price,
-                reserved: data.reserved,
-                status: data.status,
+                taxes: data.taxes,
+                reserved: parseInt(data.reserved),
+                status: parseInt(data.status),
                 guests: data.guests,
+                location: data.location,
                 createdAt: data.createdAt,
                 updatedAt: data.updatedAt,
                 hotel: {
@@ -248,7 +252,7 @@ export function FormRoom({
                                     maxLength={7}
                                     {...register("price", { 
                                         required: true,
-                                        maxLength: 200,
+                                        maxLength: 7,
                                     })}
                                 />
                                 <div className="text-error">
@@ -259,14 +263,51 @@ export function FormRoom({
                         </Col>
                         <Col md={4}>
                             <FormGroup>
+                                <Label>Impuestos <span className="input-obligatorio">*</span></Label>
+                                <input className="form-control"
+                                    type="text"
+                                    autoFocus
+                                    maxLength={7}
+                                    {...register("taxes", { 
+                                        required: true,
+                                        maxLength: 7,
+                                    })}
+                                />
+                                <div className="text-error">
+                                    {errors.taxes?.type === "required" && "Los impuestos son requeridos"}
+                                    {errors.taxes?.type === "maxLength" && "Este campo debe contener máximo 7 caracteres"}
+                                </div>
+                            </FormGroup>
+                        </Col>
+                        <Col md={4}>
+                            <FormGroup>
+                                <Label>Ubicación <span className="input-obligatorio">*</span></Label>
+                                <input className="form-control"
+                                    type="text"
+                                    maxLength={200}
+                                    { ...register("location", { 
+                                        required: true,
+                                    })}
+                                />
+                                <div className="text-error">
+                                    {errors.location?.type === "required" && "La ubicación es requerida"}
+                                    {errors.location?.type === "maxLength" && "Este campo debe contener máximo 200 caracteres"}
+                                </div>
+                            </FormGroup>
+                        </Col>
+                    </Row>
+
+                    <Row>
+                        <Col md={4}>
+                            <FormGroup>
                                 <Label>Reservada <span className="input-obligatorio">*</span></Label>
                                 <select className="form-control"
                                     {...register("reserved", {
                                         required: true,
                                     })}
                                 >
-                                    <option value="true">Reservada</option>
-                                    <option value="false">Libre</option>
+                                    <option value="0">Libre</option>
+                                    <option value="1">Reservada</option>
                                 </select>
                             </FormGroup>
                         </Col>
@@ -278,8 +319,8 @@ export function FormRoom({
                                         required: true,
                                     })}
                                 >
-                                    <option value="true">Activa</option>
-                                    <option value="false">Inactiva</option>
+                                    <option value="1">Activa</option>
+                                    <option value="0">Inactiva</option>
                                 </select>
                             </FormGroup>
                         </Col>

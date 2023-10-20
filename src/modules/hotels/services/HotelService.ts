@@ -20,7 +20,7 @@ class HotelServiceClass {
             "phone": "3142836430",
             "country": "Colombia",
             "city": "Medellin",
-            "status": true,
+            "status": 1,
             "createdAt": new Date(),
             "updatedAt": new Date()
           },
@@ -32,7 +32,7 @@ class HotelServiceClass {
             "phone": "3102456687",
             "country": "Colombia",
             "city": "Cartagena",
-            "status": false,
+            "status": 1,
             "createdAt": new Date(),
             "updatedAt": new Date()
           },
@@ -44,7 +44,7 @@ class HotelServiceClass {
             "phone": "3143556789",
             "country": "Colombia",
             "city": "Barranquilla",
-            "status": true,
+            "status": 1,
             "createdAt": new Date(),
             "updatedAt": new Date()
           }

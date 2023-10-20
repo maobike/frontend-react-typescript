@@ -115,7 +115,20 @@ export function DetailReservation({
                             </FormGroup>
                         </Col>
                     </Row>
-
+                    <Row>
+                        <Col md={4}>
+                            <FormGroup>
+                                <Label>Impuestos</Label>
+                                <span className='form-control content-detail'>{reservation?.room.taxes}</span>
+                            </FormGroup>
+                        </Col>
+                        <Col md={4}>
+                            <FormGroup>
+                                <Label>Ubicación</Label>
+                                <span className='form-control content-detail'>{reservation?.room.location}</span>
+                            </FormGroup>
+                        </Col>
+                    </Row>
                 </form>
             </ModalBody>
             <ModalFooter>

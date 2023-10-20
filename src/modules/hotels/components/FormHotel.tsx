@@ -67,7 +67,7 @@ export function FormHotel({
                 phone: data.phone,
                 country: data.country,
                 city: data.city,
-                status: data.status,
+                status: parseInt(data.status),
                 createdAt: data.createdAt,
                 updatedAt: data.updatedAt,            
             };
@@ -242,6 +242,7 @@ export function FormHotel({
                                         required: true,
                                     })}
                                 >
+                                    <option value="">Seleccione el país</option>
                                     {dataCountries?.map((nameData: DataCountries, index: number) => {
                                         return (
                                             <option key={index} value={nameData.name.common}>{nameData.name.common}</option>
@@ -281,8 +282,8 @@ export function FormHotel({
                                         required: true,
                                     })}
                                 >
-                                    <option value="true">Activo</option>
-                                    <option value="false">Inactivo</option>
+                                    <option value="1">Activo</option>
+                                    <option value="0">Inactivo</option>
                                 </select>
                             </FormGroup>
                         </Col>

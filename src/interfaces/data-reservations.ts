@@ -30,6 +30,8 @@ export interface Room {
     price: string,
     type: string,
     guests: number,
+    taxes: string,
+    location: string
 }
 
 export interface ResultData {

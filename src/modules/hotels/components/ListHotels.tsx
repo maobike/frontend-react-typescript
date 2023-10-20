@@ -147,7 +147,7 @@ export const ListHotels = () => {
                                                         <td>{dataRes.phone}</td>
                                                         <td>{dataRes.country}</td>
                                                         <td>{dataRes.city}</td>
-                                                        <td>{dataRes.status === true ? 'Activo' : 'Inactivo'}</td>
+                                                        <td>{dataRes.status === 1 ? 'Activo' : 'Inactivo'}</td>
                                                         <td style={{ textAlign: 'center', alignSelf: 'stretch' }}>
                                                             <Button title="Editar hotel" color="link" onClick={() => formHotel(dataRes)}>
                                                                 <FontAwesomeIcon icon="edit" />
