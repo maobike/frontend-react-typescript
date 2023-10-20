@@ -344,7 +344,7 @@ class SearchServiceClass {
       const templateId = "template_9qyl6k9";
       const publicKey  = "cgU_s8AAxnCZdmUuM"
       var templateParams = {
-        to_email: 'maomaoq@gmail.com',
+        to_email: `${data.email}`,
         to_name: `${data.name}`,
         from_name: `${data.name}`,
         message: `Estos son los datos de la reserva!
