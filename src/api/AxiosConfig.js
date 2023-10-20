@@ -16,3 +16,11 @@ export const axiosInstanceExtern = axios.create({
       'Content-type': 'application/json',
     },
 });
+
+export const axiosInstanceEmail = axios.create({
+    baseURL: ' https://api.emailjs.com/api/v1.0/',
+    timeout: 30000,
+    headers: {
+      'Content-type': 'application/json',
+    },
+});

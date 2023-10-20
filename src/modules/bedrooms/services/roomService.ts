@@ -20,7 +20,7 @@ class RoomServiceClass {
             "reserved": 0,
             "status": 1,
             "guests": 1,
-            "location": "",
+            "location": "Habitación 101",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -38,7 +38,7 @@ class RoomServiceClass {
             "reserved": 1,
             "status": 1,
             "guests": 2,
-            "location": "",
+            "location": "Habitación 201",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -56,7 +56,7 @@ class RoomServiceClass {
             "reserved": 0,
             "status": 0,
             "guests": 3,
-            "location": "",
+            "location": "Habitación 301",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -74,7 +74,7 @@ class RoomServiceClass {
             "reserved": 0,
             "status": 1,
             "guests": 4,
-            "location": "",
+            "location": "Habitación 401",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -92,7 +92,7 @@ class RoomServiceClass {
             "reserved": 0,
             "status": 1,
             "guests": 1,
-            "location": "",
+            "location": "Habitación 102",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -110,7 +110,7 @@ class RoomServiceClass {
             "reserved": 1,
             "status": 1,
             "guests": 2,
-            "location": "",
+            "location": "Habitación 202",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -128,7 +128,7 @@ class RoomServiceClass {
             "reserved": 0,
             "status": 0,
             "guests": 3,
-            "location": "",
+            "location": "Habitación 302",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -146,7 +146,7 @@ class RoomServiceClass {
             "reserved": 0,
             "status": 1,
             "guests": 4,
-            "location": "",
+            "location": "Habitación 402",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -164,7 +164,7 @@ class RoomServiceClass {
             "reserved": 0,
             "status": 1,
             "guests": 1,
-            "location": "",
+            "location": "Habitación 103",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -182,7 +182,7 @@ class RoomServiceClass {
             "reserved": 1,
             "status": 1,
             "guests": 2,
-            "location": "",
+            "location": "Habitación 203",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -200,7 +200,7 @@ class RoomServiceClass {
             "reserved": 0,
             "status": 0,
             "guests": 3,
-            "location": "",
+            "location": "Habitación 303",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -218,7 +218,7 @@ class RoomServiceClass {
             "reserved": 0,
             "status": 1,
             "guests": 4,
-            "location": "",
+            "location": "Habitación 403",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {

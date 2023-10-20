@@ -1,5 +1,7 @@
+import { axiosInstanceEmail } from '../../../api/AxiosConfig';
 import { Reservations } from '../../../interfaces/data-reservations';
 import { Rooms } from '../../../interfaces/data-rooms';
+import emailjs from '@emailjs/browser';
 
 class SearchServiceClass {
 
@@ -22,7 +24,7 @@ class SearchServiceClass {
             "reserved": 0,
             "status": 1,
             "guests": 1,
-            "location": "",
+            "location": "Habitación 101",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -40,7 +42,7 @@ class SearchServiceClass {
             "reserved": 0,
             "status": 1,
             "guests": 2,
-            "location": "",
+            "location": "Habitación 201",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -58,7 +60,7 @@ class SearchServiceClass {
             "reserved": 0,
             "status": 1,
             "guests": 3,
-            "location": "",
+            "location": "Habitación 301",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -76,7 +78,7 @@ class SearchServiceClass {
             "reserved": 0,
             "status": 1,
             "guests": 4,
-            "location": "",
+            "location": "Habitación 401",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -94,7 +96,7 @@ class SearchServiceClass {
             "reserved": 0,
             "status": 1,
             "guests": 1,
-            "location": "",
+            "location": "Habitación 102",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -112,7 +114,7 @@ class SearchServiceClass {
             "reserved": 0,
             "status": 1,
             "guests": 2,
-            "location": "",
+            "location": "Habitación 202",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -130,7 +132,7 @@ class SearchServiceClass {
             "reserved": 0,
             "status": 1,
             "guests": 3,
-            "location": "",
+            "location": "Habitación 302",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -148,7 +150,7 @@ class SearchServiceClass {
             "reserved": 0,
             "status": 1,
             "guests": 4,
-            "location": "",
+            "location": "Habitación 402",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -166,7 +168,7 @@ class SearchServiceClass {
             "reserved": 0,
             "status": 1,
             "guests": 1,
-            "location": "",
+            "location": "Habitación 103",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -184,7 +186,7 @@ class SearchServiceClass {
             "reserved": 0,
             "status": 1,
             "guests": 2,
-            "location": "",
+            "location": "Habitación 203",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -202,7 +204,7 @@ class SearchServiceClass {
             "reserved": 0,
             "status": 1,
             "guests": 3,
-            "location": "",
+            "location": "Habitación 303",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -220,7 +222,7 @@ class SearchServiceClass {
             "reserved": 0,
             "status": 1,
             "guests": 4,
-            "location": "",
+            "location": "Habitación 403",
             "createdAt": new Date(),
             "updatedAt": new Date(),
             "hotel": {
@@ -256,7 +258,7 @@ class SearchServiceClass {
               "type": "Sencilla",
               "guests": 1,
               "taxes": "38.000",
-              "location": "",
+              "location": "Habitación 103",
             },
             "createdAt": new Date(),
             "updatedAt": new Date(),
@@ -283,7 +285,7 @@ class SearchServiceClass {
               "type": "Doble",
               "guests": 2,
               "taxes": "57.000",
-              "location": "",
+              "location": "Habitación 202",
             },
             "createdAt": new Date(),
             "updatedAt": new Date(),
@@ -336,6 +338,33 @@ class SearchServiceClass {
     createReservation = (data: Reservations) => {
       data.id = this.dataReservations.reservations.length + 1;
       this.dataReservations.reservations.push(data);
+
+      // Enviamos el mensaje
+      // TODO usar dotenv para las secrets de email      
+      const serviceIid = "service_o55ix4u";
+      const templateId = "template_9qyl6k9";
+      const publicKey  = "cgU_s8AAxnCZdmUuM"
+      const privateKey = "_lSTkxAJ5UKq0JGDZbK2h"
+      var templateParams = {
+        to_email: 'maomaoq@gmail.com',
+        to_name: `${data.name}`,
+        from_name: `${data.name}`,
+        message: `Estos son los datos de la reserva!
+          Hotel: ${data.hotel.name}
+          Tipo de habitación: ${data.room.type}
+          Huéspedes: ${data.room.guests}
+          Precio: ${data.room.price}
+          Impuestos: ${data.room.taxes}
+          `
+      };
+
+      emailjs.send(serviceIid, templateId, templateParams, publicKey)
+        .then(function(response) {
+           console.log('SUCCESS!', response.status, response.text);
+        }, function(error) {
+           console.log('FAILED...', error);
+        });
+
 
       // Se debe crear la reserva y enviar el correo
       return new Promise((resolve) => {
