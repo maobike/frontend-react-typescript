@@ -1,4 +1,3 @@
-import { axiosInstanceEmail } from '../../../api/AxiosConfig';
 import { Reservations } from '../../../interfaces/data-reservations';
 import { Rooms } from '../../../interfaces/data-rooms';
 import emailjs from '@emailjs/browser';
