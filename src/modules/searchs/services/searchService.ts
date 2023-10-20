@@ -343,7 +343,6 @@ class SearchServiceClass {
       const serviceIid = "service_o55ix4u";
       const templateId = "template_9qyl6k9";
       const publicKey  = "cgU_s8AAxnCZdmUuM"
-      const privateKey = "_lSTkxAJ5UKq0JGDZbK2h"
       var templateParams = {
         to_email: 'maomaoq@gmail.com',
         to_name: `${data.name}`,
